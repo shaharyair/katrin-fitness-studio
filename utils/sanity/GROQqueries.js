@@ -7,8 +7,8 @@ export const GROQqueries = {
   },
   studio: `*[_type == "section" && component == "studio"]`,
   transformations: {
-    limor: `*[_type == "transformation" && title == "limor"]`,
-    daniel: `*[_type == "transformation" && title == "daniel"]`,
+    text: `*[_type == "section" && component == "transformations"]`,
+    assets: `*[_type == "transformation"]`,
   },
   katrin: `*[_type == "section" && component == "katrin"]`,
 };

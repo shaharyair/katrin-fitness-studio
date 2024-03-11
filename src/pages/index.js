@@ -15,7 +15,7 @@ export default function Home({
   heroContent,
   servicesContent,
   studioContent,
-  transformationsAssets,
+  transformationsContent,
   reviewsAssets,
   katrinContent,
 }) {
@@ -27,7 +27,7 @@ export default function Home({
       <Hero content={heroContent[0]} />
       <Services content={servicesContent} />
       <Studio content={studioContent[0]} />
-      <Transformations media={transformationsAssets} />
+      <Transformations content={transformationsContent} />
       <Reviews media={reviewsAssets} />
       <Katrin content={katrinContent[0]} />
       <Faq />
@@ -52,10 +52,11 @@ export async function getStaticProps() {
 
     const studioContent = await client.fetch(GROQqueries.studio);
 
-    const transformationsAssets = await fetchCloudinaryResources(
-      "image",
-      "transformations",
-    );
+    const transformationsContent = {
+      text: await client.fetch(GROQqueries.transformations.text),
+      assets: await client.fetch(GROQqueries.transformations.assets),
+    };
+
     const reviewsAssets = await fetchCloudinaryResources("image", "reviews");
 
     const katrinContent = await client.fetch(GROQqueries.katrin);
@@ -65,7 +66,7 @@ export async function getStaticProps() {
         heroContent,
         servicesContent,
         studioContent,
-        transformationsAssets,
+        transformationsContent,
         reviewsAssets,
         katrinContent,
       },
@@ -77,7 +78,7 @@ export async function getStaticProps() {
         heroContent: [],
         servicesContent: [],
         studioContent: [],
-        transformationsAssets: [],
+        transformationsContent: [],
         reviewsAssets: [],
         katrinContent: [],
       },
