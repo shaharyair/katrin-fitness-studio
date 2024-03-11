@@ -10,4 +10,5 @@ export const GROQqueries = {
     limor: `*[_type == "transformation" && title == "limor"]`,
     daniel: `*[_type == "transformation" && title == "daniel"]`,
   },
+  katrin: `*[_type == "section" && component == "katrin"]`,
 };

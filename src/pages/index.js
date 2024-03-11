@@ -1,6 +1,7 @@
 import Contact from "@/components/Contact";
 import Faq from "@/components/Faq";
 import Hero from "@/components/Hero";
+import Katrin from "@/components/Katrin";
 import Reviews from "@/components/Reviews";
 import Services from "@/components/Services/Services";
 import Studio from "@/components/Studio";
@@ -16,7 +17,7 @@ export default function Home({
   studioContent,
   transformationsAssets,
   reviewsAssets,
-  katrinAssests,
+  katrinContent,
 }) {
   return (
     <>
@@ -28,7 +29,7 @@ export default function Home({
       <Studio content={studioContent[0]} />
       <Transformations media={transformationsAssets} />
       <Reviews media={reviewsAssets} />
-      {/* <Katrin background={studioAssets[2]} katrin={katrinAssests} /> */}
+      <Katrin content={katrinContent[0]} />
       <Faq />
       <Contact />
     </>
@@ -56,7 +57,8 @@ export async function getStaticProps() {
       "transformations",
     );
     const reviewsAssets = await fetchCloudinaryResources("image", "reviews");
-    const katrinAssests = await fetchCloudinaryResources("image", "katrin");
+
+    const katrinContent = await client.fetch(GROQqueries.katrin);
 
     return {
       props: {
@@ -65,7 +67,7 @@ export async function getStaticProps() {
         studioContent,
         transformationsAssets,
         reviewsAssets,
-        katrinAssests,
+        katrinContent,
       },
     };
   } catch (error) {
@@ -77,7 +79,7 @@ export async function getStaticProps() {
         studioContent: [],
         transformationsAssets: [],
         reviewsAssets: [],
-        katrinAssests: [],
+        katrinContent: [],
       },
     };
   }

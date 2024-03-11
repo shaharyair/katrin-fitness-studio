@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
+import { PortableText } from "next-sanity";
 import Image from "next/image";
+import { urlFor } from "../../utils/sanity/imageUrlBuilder";
 
 const text = {
   introduction: "קצת עליי",
@@ -22,7 +24,7 @@ const katrinVariants = {
   },
 };
 
-export default function Katrin({ background, katrin }) {
+export default function Katrin({ content }) {
   return (
     <section className="relative flex w-full items-center py-10">
       {/* offset for scroll link */}
@@ -30,11 +32,12 @@ export default function Katrin({ background, katrin }) {
 
       <div className="absolute left-0 top-0 -z-50 h-full w-full bg-black">
         <Image
-          src={background?.url}
-          width={background?.width}
-          height={background?.height}
+          src={urlFor(content?.mainImage).url()}
+          fill
+          sizes="100vw"
           alt="Katrin Background Image"
           className="h-full w-full object-cover object-center brightness-[15%] grayscale"
+          loading="lazy"
         />
       </div>
 
@@ -47,11 +50,12 @@ export default function Katrin({ background, katrin }) {
           className="flex h-full w-full items-center justify-center"
         >
           <Image
-            src={katrin[0]?.url}
-            width={katrin[0]?.width}
-            height={katrin[0]?.height}
+            src={urlFor(content?.secondImage).url()}
+            width={500}
+            height={750}
             alt="Katrin Image"
             className="w-1/2 object-cover object-center drop-shadow-md lg:w-3/4"
+            loading="lazy"
           />
         </motion.div>
 
@@ -60,13 +64,14 @@ export default function Katrin({ background, katrin }) {
           className="flex flex-col items-center justify-center gap-4 text-center text-lg font-thin text-white drop-shadow-md lg:items-start lg:text-right lg:text-2xl"
         >
           <h2 className="text-xl font-normal lg:text-3xl">
-            {text.introduction}
+            {content?.subtitle}
           </h2>
           <h1 className="mb-2 text-2xl font-normal text-primary lg:text-4xl">
-            {text.title}
+            {content?.title}
           </h1>
-          <p>{text.part1}</p>
-          <p>{text.part2}</p>
+          <div>
+            <PortableText value={content?.body} />
+          </div>
         </div>
       </div>
     </section>
