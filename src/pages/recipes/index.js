@@ -3,6 +3,7 @@ import Carousel from "@/components/Carousel/Carousel";
 import Head from "next/head";
 import Link from "next/link";
 import fetchCloudinaryResources from "../../../utils/cloudinary";
+import { links } from "../../../utils/links";
 
 const carouselOptions = {
   loop: true,
@@ -13,10 +14,6 @@ const carouselOptions = {
       align: "start",
     },
   },
-};
-
-const link = {
-  whatsapp: "https://chat.whatsapp.com/LNe0EqWlJStCAtybKVw3Rm",
 };
 
 const text = {
@@ -49,7 +46,7 @@ export default function Gallery({ recipesAssets }) {
               style={{ direction: "rtl" }}
             >
               <h3>{text.title}</h3>
-              <Link href={link.whatsapp}>
+              <Link href={links.recipesWhatsapp}>
                 <Button
                   type="button"
                   className="bg-black text-white hover:bg-white hover:text-black"

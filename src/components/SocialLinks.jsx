@@ -1,14 +1,8 @@
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaPhone, FaWhatsapp } from "react-icons/fa6";
 import { cn } from "../../utils/cn";
+import { links } from "../../utils/links";
 import Button from "./Button";
-
-const links = {
-  facebook: "https://www.facebook.com/katrin.yair",
-  instagram: "https://www.instagram.com/katrinyair",
-  whatsapp: "https://wa.me/972556620441",
-  phone: "tel:+972556620441",
-};
 
 export default function SocialLinks(props) {
   return (
