@@ -43,7 +43,10 @@ const schema = z.object({
   phoneNumber: z
     .string()
     .regex(/^05\d{8}$/, { message: customErrorMessages.phoneNumber }),
-  message: z.string().max(500, { message: customErrorMessages.message }),
+  message: z
+    .string()
+    .max(500, { message: customErrorMessages.message })
+    .optional(),
 });
 
 export default function Contact() {
@@ -74,8 +77,10 @@ export default function Contact() {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
-      console.log(result);
+      if (!response.ok) {
+        setModalMessage(modalMessages.fail);
+        throw new Error("Failed to send email");
+      }
 
       setModalMessage(modalMessages.success);
       reset();
