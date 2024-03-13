@@ -32,49 +32,47 @@ export default function Transformations({ content }) {
         {/* gallery */}
         <div className="flex h-full w-full flex-wrap items-center justify-center">
           {assets.map((assetObj) => (
-            <>
-              <div
-                className="flex h-full w-full items-center justify-center lg:w-1/2"
-                key={assetObj?._id}
+            <div
+              className="flex h-full w-full items-center justify-center lg:w-1/2"
+              key={assetObj?._id}
+            >
+              {/* after transformation image */}
+              <motion.div
+                variants={transformationVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="aspect-[1/1.15] h-full w-full px-0.5 py-1 lg:p-1"
               >
-                {/* after transformation image */}
-                <motion.div
-                  variants={transformationVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="aspect-[1/1.15] h-full w-full px-0.5 py-1 lg:p-1"
-                >
-                  <Image
-                    src={urlFor(assetObj?.afterImage).url()}
-                    width={500}
-                    height={500}
-                    alt={`After Image ${assetObj?.title}`}
-                    className="h-full w-full rounded-lg border-[.5px] border-primary object-cover object-center drop-shadow-md"
-                    loading="lazy"
-                  />
-                </motion.div>
+                <Image
+                  src={urlFor(assetObj?.afterImage).url()}
+                  width={500}
+                  height={500}
+                  alt={`After Image ${assetObj?.title}`}
+                  className="h-full w-full rounded-lg border-[.5px] border-primary object-cover object-center drop-shadow-md"
+                  loading="lazy"
+                />
+              </motion.div>
 
-                {/* before transformation image */}
-                <motion.div
-                  variants={transformationVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="aspect-[1/1.15] h-full w-full px-0.5 py-1 lg:p-1"
-                  key={assetObj?.id}
-                >
-                  <Image
-                    src={urlFor(assetObj?.beforeImage).url()}
-                    width={500}
-                    height={500}
-                    alt={`Before Image ${assetObj?.title}`}
-                    className="h-full w-full rounded-lg border-[.5px] border-primary object-cover object-center drop-shadow-md"
-                    loading="lazy"
-                  />
-                </motion.div>
-              </div>
-            </>
+              {/* before transformation image */}
+              <motion.div
+                variants={transformationVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="aspect-[1/1.15] h-full w-full px-0.5 py-1 lg:p-1"
+                key={assetObj?.id}
+              >
+                <Image
+                  src={urlFor(assetObj?.beforeImage).url()}
+                  width={500}
+                  height={500}
+                  alt={`Before Image ${assetObj?.title}`}
+                  className="h-full w-full rounded-lg border-[.5px] border-primary object-cover object-center drop-shadow-md"
+                  loading="lazy"
+                />
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
