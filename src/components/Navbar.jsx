@@ -1,4 +1,4 @@
-import { Squash as Hamburger } from "hamburger-react";
+import { Cross as Hamburger } from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -106,7 +106,7 @@ export default function Navbar() {
 
           {/* Navbar Links */}
           <nav
-            className={`${isNavbarOpen ? "right-0" : "-right-3/4"} ${!scrolled ? "drop-shadow-sm" : "lg:text-black"} absolute top-full flex h-screen w-3/4 flex-col items-center justify-start gap-8 whitespace-nowrap bg-black-navbar px-2 py-4 text-white transition-[right] duration-100 ease-linear lg:static lg:h-full lg:w-auto lg:flex-row lg:justify-between lg:bg-transparent lg:p-0`}
+            className={`${isNavbarOpen && "-translate-x-full"}  ${!scrolled ? "drop-shadow-sm" : "lg:text-black"} absolute -right-3/4 top-full flex h-screen w-3/4 flex-col items-center justify-start gap-8 whitespace-nowrap bg-black-navbar px-2 py-4 text-white transition-transform duration-300 ease-in-out will-change-transform lg:static lg:h-full lg:w-auto lg:flex-row lg:justify-between lg:bg-transparent lg:p-0 lg:transition-none `}
           >
             <ul className="grid w-full auto-cols-auto place-items-center divide-y text-center  lg:m-0 lg:flex lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-4 lg:divide-y-0 lg:divide-white">
               {Object.entries(links).map(([key, { href, label }]) => (
@@ -129,8 +129,9 @@ export default function Navbar() {
               toggle={() => setIsNavbarOpen(!isNavbarOpen)}
               label="Show mobile menu"
               hideOutline={true}
-              duration={0.1}
-              size={24}
+              duration={0.5}
+              direction="right"
+              size={28}
               rounded
             />
           </div>
