@@ -7,17 +7,6 @@ const loadingScreenVariants = {
   exit: { opacity: 0, transition: { ease: "linear", duration: 0.5 } },
 };
 
-const spinnerVariants = {
-  animate: {
-    rotate: 360,
-    transition: {
-      ease: "linear",
-      repeat: Infinity,
-      duration: 0.6,
-    },
-  },
-};
-
 export default function LoadingScreen() {
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +28,7 @@ export default function LoadingScreen() {
             exit="exit"
             className="fixed left-0 top-0 z-[60] flex h-full w-full items-center justify-center bg-[#bba187]"
           >
-            <div className="relative w-3/5 rounded-full lg:w-1/6">
+            <div className="relative max-h-72 w-3/5 max-w-72 rounded-full lg:w-1/6">
               <Image
                 src={"/LoadingScreen/circleLogo.webp"}
                 width={250}
@@ -48,11 +37,7 @@ export default function LoadingScreen() {
                 priority={true}
                 className="aspect-square w-full rounded-full object-cover object-center drop-shadow-lg"
               />
-              <motion.div
-                variants={spinnerVariants}
-                animate="animate"
-                className="absolute left-[-2.5%] top-[-2.5%] h-[105%] w-[105%] rounded-full border-[3px] border-r-[6px] border-[#ebebeb3b] border-r-white"
-              />
+              <div className="anim absolute left-[-2.5%] top-[-2.5%] h-[105%] w-[105%] animate-spin rounded-full border-[3px] border-r-[6px] border-[#ebebeb3b] border-r-white" />
             </div>
           </motion.div>
         )}
