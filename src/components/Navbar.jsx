@@ -108,18 +108,17 @@ export default function Navbar() {
           <nav
             className={`${isNavbarOpen && "-translate-x-full"}  ${!scrolled ? "drop-shadow-sm" : "lg:text-black"} absolute -right-3/4 top-full flex h-screen w-3/4 flex-col items-center justify-start gap-8 whitespace-nowrap bg-black-navbar px-2 py-4 text-white transition-transform duration-300 ease-in-out will-change-transform lg:static lg:h-full lg:w-auto lg:flex-row lg:justify-between lg:bg-transparent lg:p-0 lg:transition-none `}
           >
-            <ul className="grid w-full auto-cols-auto place-items-center divide-y text-center  lg:m-0 lg:flex lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-4 lg:divide-y-0 lg:divide-white">
+            <div className="grid w-full auto-cols-auto place-items-center divide-y text-center lg:m-0 lg:flex lg:flex-row-reverse lg:items-center lg:justify-center lg:gap-4 lg:divide-y-0 lg:divide-white">
               {Object.entries(links).map(([key, { href, label }]) => (
-                <li
+                <Link
                   key={key}
                   className={`${href === links.contact.href && "lg:hidden"} w-full p-4 transition-colors duration-100 lg:px-2 lg:py-1 lg:hover:text-primary`}
+                  href={href}
                 >
-                  <Link href={href} className="w-full lg:w-auto">
-                    {label}
-                  </Link>
-                </li>
+                  {label}
+                </Link>
               ))}
-            </ul>
+            </div>
           </nav>
 
           {/* Hamburger Icon */}
