@@ -1,28 +1,6 @@
-import { motion } from "framer-motion";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { urlFor } from "../../utils/sanity/imageUrlBuilder";
-
-const text = {
-  introduction: "קצת עליי",
-  title: "קאתרין יאיר",
-  part1:
-    "לאורך החיים ספורט היה המקום השמח שלי, כשהגעתי לאימון הרגשתי מחוברת וקשובה לעצמי, הרגשתי שאני נותנת לעצמי מקום, מתפתחת וצומחת. הרגשתי שאני מתמלאת בעוצמה ויכולה לעשות הכל. מתחתי את הגבולות שלי.",
-  part2:
-    "עם הזמן הבנתי שזו התשוקה שלי, לתת בית לכל אותן נשים שמחפשות את העוצמה הזאת, לכן החלטתי להיות מאמנת כושר וליצור לי ולמתאמנות שלי את הבית הזה.",
-};
-
-const katrinVariants = {
-  hidden: { opacity: 0, y: 100 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay: 0.25,
-    },
-  },
-};
 
 export default function Katrin({ content }) {
   return (
@@ -42,22 +20,14 @@ export default function Katrin({ content }) {
       </div>
 
       <div className="container z-20 flex flex-col-reverse items-center justify-center gap-8 lg:flex-row-reverse">
-        <motion.div
-          variants={katrinVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex h-full w-full items-center justify-center"
-        >
-          <Image
-            src={urlFor(content?.secondImage).url()}
-            width={500}
-            height={750}
-            alt="Katrin Image"
-            className="w-1/2 object-cover object-center drop-shadow-md lg:w-3/4"
-            loading="lazy"
-          />
-        </motion.div>
+        <Image
+          src={urlFor(content?.secondImage).url()}
+          width={500}
+          height={750}
+          alt="Katrin Image"
+          className="w-1/2 object-cover object-center drop-shadow-md lg:w-3/5"
+          loading="lazy"
+        />
 
         <div
           style={{ direction: "rtl" }}
