@@ -85,7 +85,7 @@ export default function Navbar() {
         <div
           className={cn(
             `${!scrolled && "lg:py-8"}`,
-            "relative m-auto flex flex-row items-center justify-end px-2 py-2.5 transition-[padding] duration-150 ease-linear lg:container lg:flex-row-reverse lg:justify-start lg:gap-16",
+            "relative m-auto flex flex-row items-center justify-end px-3 py-2.5 transition-[padding] duration-150 ease-linear lg:container lg:flex-row-reverse lg:justify-start lg:gap-16",
           )}
         >
           {/* Navbar Logo */}
