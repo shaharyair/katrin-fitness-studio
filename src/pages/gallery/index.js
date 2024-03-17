@@ -1,6 +1,26 @@
 import Carousel from "@/components/Carousel/Carousel";
+import ImageCarousel from "@/components/Carousel/ImageCarousel";
 import Head from "next/head";
 import fetchCloudinaryResources from "../../../utils/cloudinary";
+import { GROQqueries } from "../../../utils/sanity/GROQqueries";
+import { client } from "../../../utils/sanity/client";
+
+const settings = {
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 
 const carouselOptions = {
   loop: true,
@@ -14,9 +34,9 @@ const carouselOptions = {
 };
 
 export default function Gallery({
+  studioGalleryContent,
   pilatesAssets,
   strengthTrainingAssets,
-  galleryAssets,
 }) {
   return (
     <>
@@ -25,15 +45,15 @@ export default function Gallery({
       </Head>
       <section className="w-full bg-black pb-10 pt-24 lg:pt-28">
         <div className="container flex flex-col items-center justify-center gap-10">
-          <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex w-full flex-col items-center justify-center gap-4">
             <h3 className="text-3xl text-primary lg:text-4xl">גלריה</h3>
-            <Carousel
-              slideStyle="lg:w-1/4"
-              className="lg:w-full"
-              mediaType="image"
-              slides={galleryAssets}
-              options={carouselOptions}
-            />
+
+            <div className="w-[90%]">
+              <ImageCarousel
+                slides={studioGalleryContent[0].images}
+                settings={settings}
+              />
+            </div>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-4">
@@ -65,11 +85,8 @@ export default function Gallery({
 
 export async function getStaticProps() {
   try {
-    const galleryAssets = await fetchCloudinaryResources(
-      "image",
-      "studio",
-      1000,
-    );
+    const studioGalleryContent = await client.fetch(GROQqueries.studioGallery);
+
     const pilatesAssets = await fetchCloudinaryResources("video", "pilates");
     const strengthTrainingAssets = await fetchCloudinaryResources(
       "video",
@@ -78,7 +95,7 @@ export async function getStaticProps() {
 
     return {
       props: {
-        galleryAssets,
+        studioGalleryContent,
         pilatesAssets,
         strengthTrainingAssets,
       },
@@ -87,7 +104,7 @@ export async function getStaticProps() {
     console.error("Error fetching images from Cloudinary:", error);
     return {
       props: {
-        galleryAssets: [],
+        studioGalleryContent: [],
         pilatesAssets: [],
         strengthTrainingAssets: [],
       },

@@ -15,4 +15,5 @@ export const GROQqueries = {
     assets: `*[_type == "imageCarousel" && title == "reviews"]`,
   },
   katrin: `*[_type == "section" && component == "katrin"]`,
+  studioGallery: `*[_type == "imageCarousel" && title == "studio"]`,
 };
