@@ -10,5 +10,9 @@ export const GROQqueries = {
     text: `*[_type == "section" && component == "transformations"]`,
     assets: `*[_type == "transformation"]`,
   },
+  reviews: {
+    text: `*[_type == "section" && component == "reviews"]`,
+    assets: `*[_type == "imageCarousel" && title == "reviews"]`,
+  },
   katrin: `*[_type == "section" && component == "katrin"]`,
 };

@@ -7,7 +7,6 @@ import Services from "@/components/Services/Services";
 import Studio from "@/components/Studio";
 import Transformations from "@/components/Transformations";
 import Head from "next/head";
-import fetchCloudinaryResources from "../../utils/cloudinary";
 import { GROQqueries } from "../../utils/sanity/GROQqueries";
 import { client } from "../../utils/sanity/client";
 
@@ -16,7 +15,7 @@ export default function Home({
   servicesContent,
   studioContent,
   transformationsContent,
-  reviewsAssets,
+  reviewsContent,
   katrinContent,
 }) {
   return (
@@ -28,7 +27,7 @@ export default function Home({
       <Services content={servicesContent} />
       <Studio content={studioContent[0]} />
       <Transformations content={transformationsContent} />
-      <Reviews media={reviewsAssets} />
+      <Reviews content={reviewsContent} />
       <Katrin content={katrinContent[0]} />
       <Faq />
       <Contact />
@@ -57,7 +56,10 @@ export async function getStaticProps() {
       assets: await client.fetch(GROQqueries.transformations.assets),
     };
 
-    const reviewsAssets = await fetchCloudinaryResources("image", "reviews");
+    const reviewsContent = {
+      text: await client.fetch(GROQqueries.reviews.text),
+      assets: await client.fetch(GROQqueries.reviews.assets),
+    };
 
     const katrinContent = await client.fetch(GROQqueries.katrin);
 
@@ -67,7 +69,7 @@ export async function getStaticProps() {
         servicesContent,
         studioContent,
         transformationsContent,
-        reviewsAssets,
+        reviewsContent,
         katrinContent,
       },
     };
@@ -79,7 +81,7 @@ export async function getStaticProps() {
         servicesContent: [],
         studioContent: [],
         transformationsContent: [],
-        reviewsAssets: [],
+        reviewsContent: [],
         katrinContent: [],
       },
     };
