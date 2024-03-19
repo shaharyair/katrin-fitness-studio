@@ -1,25 +1,11 @@
-import ImageCarousel from "./Carousel/ImageCarousel";
+import Carousel from "./Carousel/Carousel";
 
-const settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 2,
-  slidesToScroll: 1,
-
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
+const carouselOptions = {
+  loop: true,
+  align: "start",
 };
 
 export default function Reviews({ content }) {
-  const { text, assets } = content;
-
   return (
     <>
       <section className="w-full bg-black py-10" id="reviews-carousel">
@@ -29,12 +15,16 @@ export default function Reviews({ content }) {
               style={{ direction: "rtl" }}
               className="flex flex-col items-center justify-center text-center text-2xl font-thin lg:items-start lg:gap-4 lg:text-right lg:text-5xl"
             >
-              <h2 className=" font-normal text-primary ">{text[0].title}</h2>
-              <p className="leading-10 lg:text-4xl">{text[0].subtitle}</p>
+              <h2 className=" font-normal text-primary ">{content?.title}</h2>
+              <p className="leading-10 lg:text-4xl">{content?.subtitle}</p>
             </div>
 
-            <div className="w-[90%] lg:w-3/5">
-              <ImageCarousel slides={assets[0].images} settings={settings} />
+            <div className="w-full lg:w-3/5">
+              <Carousel
+                options={carouselOptions}
+                content={content?.images}
+                contentStyle="lg:w-1/2"
+              />
             </div>
           </div>
         </div>

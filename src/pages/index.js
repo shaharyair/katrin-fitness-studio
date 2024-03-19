@@ -27,7 +27,7 @@ export default function Home({
       <Services content={servicesContent} />
       <Studio content={studioContent[0]} />
       <Transformations content={transformationsContent} />
-      <Reviews content={reviewsContent} />
+      <Reviews content={reviewsContent[0]} />
       <Katrin content={katrinContent[0]} />
       <Faq />
       <Contact />
@@ -56,11 +56,7 @@ export async function getStaticProps() {
       assets: await client.fetch(GROQqueries.transformations.assets),
     };
 
-    const reviewsContent = {
-      text: await client.fetch(GROQqueries.reviews.text),
-      assets: await client.fetch(GROQqueries.reviews.assets),
-    };
-
+    const reviewsContent = await client.fetch(GROQqueries.reviews);
     const katrinContent = await client.fetch(GROQqueries.katrin);
 
     return {
