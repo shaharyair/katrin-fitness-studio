@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useCallback, useEffect, useState } from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { cn } from "../../../utils/cn";
@@ -42,8 +43,8 @@ export const PrevButton = (props) => {
   const { children, className, ...restProps } = props;
 
   return (
-    <Button className={cn("p-2", className)} type="button" {...restProps}>
-      <FaAngleLeft className="text-sm lg:text-base" />
+    <Button className={cn("p-0.5", className)} type="button" {...restProps}>
+      <FaAngleLeft className="text-sm" />
       {children}
     </Button>
   );
@@ -53,9 +54,13 @@ export const NextButton = (props) => {
   const { children, className, ...restProps } = props;
 
   return (
-    <Button className={cn("p-2", className)} type="button" {...restProps}>
-      <FaAngleRight className="text-sm lg:text-base" />
+    <Button className={cn("p-0.5", className)} type="button" {...restProps}>
+      <FaAngleRight className="text-sm" />
       {children}
     </Button>
   );
+};
+
+usePrevNextButtons.propTypes = {
+  emblaApi: PropTypes.object.isRequired,
 };

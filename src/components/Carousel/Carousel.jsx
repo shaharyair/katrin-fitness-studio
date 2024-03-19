@@ -1,10 +1,29 @@
 import useEmblaCarousel from "embla-carousel-react";
-import Image from "next/image";
+import PropTypes from "prop-types";
 import { cn } from "../../../utils/cn";
 import { NextButton, PrevButton, usePrevNextButtons } from "./CarouselButtons";
+import CarouselImages from "./CarouselImages";
+import CarouselVideos from "./CarouselVideos";
+
+/**
+ * @component
+ * @param {object} props - The properties that define the Carousel component.
+ * @param {object} props.options - The options for the EmblaCarousel component. (Required)
+ * @param {array} props.content - The content to display in the carousel, an array of objects. (Required)
+ * @param {string} props.contentType - The type of content to display in the carousel ("video" or "image"), defaults to "image".
+ * @param {string} props.containerStyle - Additional CSS classes to apply to the container. (Optional)
+ * @param {string} props.contentStyle - Additional CSS classes to apply to the content. (Optional)
+ * @returns {React.Element} The Carousel component
+ */
 
 export default function Carousel(props) {
-  const { slides, options, className, mediaType, slideStyle } = props;
+  const {
+    options,
+    contentType = "image",
+    content,
+    containerStyle,
+    contentStyle,
+  } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const {
@@ -15,42 +34,22 @@ export default function Carousel(props) {
   } = usePrevNextButtons(emblaApi);
 
   return (
-    <section className={cn("relative w-full px-10 lg:w-3/5", className)}>
+    <section className={cn("relative w-full px-5 lg:px-6", containerStyle)}>
       <div
-        className="z-20 m-auto w-full overflow-hidden rounded-lg lg:px-1"
+        className="z-20 m-auto w-full overflow-hidden rounded-lg"
         ref={emblaRef}
       >
-        <div className="flex touch-pan-y">
-          {slides.map((mediaObj) => (
-            <div
-              className={cn(
-                "mx-1 w-full flex-auto flex-shrink-0 flex-grow-0 lg:w-1/2",
-                slideStyle,
-              )}
-              key={mediaObj.asset_id}
-            >
-              {mediaType === "image" && (
-                <Image
-                  src={mediaObj?.url}
-                  width={mediaObj?.width}
-                  height={mediaObj?.height}
-                  alt={`Image ${mediaObj?.asset_id}`}
-                  className="h-full w-full rounded-lg object-cover object-center drop-shadow-md"
-                  loading="lazy"
-                />
-              )}
+        {contentType === "video" && (
+          <CarouselVideos
+            emblaApi={emblaApi}
+            videos={content}
+            videosStyle={contentStyle}
+          />
+        )}
 
-              {mediaType === "video" && (
-                <video
-                  src={mediaObj?.url}
-                  alt={`Video ${mediaObj?.asset_id}`}
-                  className="h-full w-full rounded-lg drop-shadow-md"
-                  controls
-                />
-              )}
-            </div>
-          ))}
-        </div>
+        {contentType === "image" && (
+          <CarouselImages images={content} imagesStyle={contentStyle} />
+        )}
       </div>
 
       <PrevButton
@@ -66,3 +65,11 @@ export default function Carousel(props) {
     </section>
   );
 }
+
+Carousel.propTypes = {
+  options: PropTypes.object.isRequired,
+  content: PropTypes.arrayOf(PropTypes.object).isRequired,
+  contentType: PropTypes.string,
+  containerStyle: PropTypes.string,
+  contentStyle: PropTypes.string,
+};
