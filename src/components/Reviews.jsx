@@ -20,6 +20,8 @@ export default function Reviews({ content }) {
                 options={carouselOptions}
                 content={content?.images}
                 contentStyle="lg:w-1/2"
+                width={500}
+                height={705}
               />
             </div>
           </div>
