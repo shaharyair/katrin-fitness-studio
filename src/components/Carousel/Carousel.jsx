@@ -13,6 +13,8 @@ import CarouselVideos from "./CarouselVideos";
  * @param {string} props.contentType - The type of content to display in the carousel ("video" or "image"), defaults to "image".
  * @param {string} props.containerStyle - Additional CSS classes to apply to the container. (Optional)
  * @param {string} props.contentStyle - Additional CSS classes to apply to the content. (Optional)
+ * @param {number} props.width The width of the images in the carousel. Default is 500px (Optional)
+ * @param {number} props.height The height of the images in the carousel. Default is 500px (Optional)
  * @returns {React.Element} The Carousel component
  */
 
@@ -23,6 +25,8 @@ export default function Carousel(props) {
     content,
     containerStyle,
     contentStyle,
+    width = 500,
+    height = 500,
   } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -39,7 +43,7 @@ export default function Carousel(props) {
         className="z-20 m-auto w-full overflow-hidden rounded-lg"
         ref={emblaRef}
       >
-        <div className="backface-hidden flex touch-pan-y">
+        <div className="flex touch-pan-y backface-hidden">
           {contentType === "video" && (
             <CarouselVideos
               emblaApi={emblaApi}
@@ -49,7 +53,12 @@ export default function Carousel(props) {
           )}
 
           {contentType === "image" && (
-            <CarouselImages images={content} imagesStyle={contentStyle} />
+            <CarouselImages
+              images={content}
+              imagesStyle={contentStyle}
+              width={width}
+              height={height}
+            />
           )}
         </div>
       </div>
@@ -74,4 +83,6 @@ Carousel.propTypes = {
   contentType: PropTypes.string,
   containerStyle: PropTypes.string,
   contentStyle: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };

@@ -8,11 +8,13 @@ import { urlFor } from "../../../utils/sanity/imageUrlBuilder";
  * @param {object} props The properties that define the CarouselImages component.
  * @param {array} props.images The images to display in the carousel, an array of objects. (Required)
  * @param {string} props.imagesStyle Additional CSS classes to apply to the images. (Optional)
+ * @param {number} props.width The width of the images in the carousel. (Required)
+ * @param {number} props.height The height of the images in the carousel. (Required)
  * @returns {React.Element} CarouselImages component to use in the Carousel component.
  */
 
 export default function CarouselImages(props) {
-  const { images, imagesStyle } = props;
+  const { images, imagesStyle, width, height } = props;
 
   return (
     <>
@@ -29,8 +31,8 @@ export default function CarouselImages(props) {
           >
             <Image
               src={imageUrl}
-              width={500}
-              height={500}
+              width={width}
+              height={height}
               alt={`Image ${image._key}`}
               className="h-full w-full rounded-lg object-cover object-center p-1 drop-shadow-md"
               loading="lazy"
@@ -45,4 +47,6 @@ export default function CarouselImages(props) {
 CarouselImages.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   imagesStyle: PropTypes.string,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 };
