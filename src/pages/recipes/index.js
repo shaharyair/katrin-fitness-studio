@@ -1,16 +1,12 @@
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel/Carousel";
+import { carouselOptions } from "@/components/Carousel/CarouselOptions";
 import Head from "next/head";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import { links } from "../../../utils/links";
 import { GROQqueries } from "../../../utils/sanity/GROQqueries";
 import { client } from "../../../utils/sanity/client";
-
-const carouselOptions = {
-  loop: true,
-  align: "start",
-};
 
 const bannerText = {
   title: "מעוניינת לראות עוד? הצטרפי לקבוצת המתכונים שלנו!",

@@ -1,9 +1,5 @@
 import Carousel from "./Carousel/Carousel";
-
-const carouselOptions = {
-  loop: true,
-  align: "start",
-};
+import { carouselOptions } from "./Carousel/CarouselOptions";
 
 export default function Reviews({ content }) {
   return (
