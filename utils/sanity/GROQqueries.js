@@ -11,10 +11,11 @@ export const GROQqueries = {
     assets: `*[_type == "transformation"]`,
   },
   reviews: `*[_type == "imageCarousel" && component == "reviews"]`,
-    text: `*[_type == "section" && component == "reviews"]`,
-    assets: `*[_type == "imageCarousel" && title == "reviews"]`,
-  },
   katrin: `*[_type == "section" && component == "katrin"]`,
   recipes: `*[_type == "videoCarousel" && component == "recipes"]`,
-  studioGallery: `*[_type == "imageCarousel" && title == "studio"]`,
+  gallery: {
+    studio: `*[_type == "imageCarousel" && component == "studio"]`,
+    pilates: `*[_type == "videoCarousel" && component == "pilates"]`,
+    strengthTraining: `*[_type == "videoCarousel" && component == "strengthTraining"]`,
+  },
 };

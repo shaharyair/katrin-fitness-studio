@@ -1,42 +1,18 @@
 import Carousel from "@/components/Carousel/Carousel";
-import ImageCarousel from "@/components/Carousel/ImageCarousel";
 import Head from "next/head";
-import fetchCloudinaryResources from "../../../utils/cloudinary";
+import PropTypes from "prop-types";
 import { GROQqueries } from "../../../utils/sanity/GROQqueries";
 import { client } from "../../../utils/sanity/client";
 
-const settings = {
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
-
 const carouselOptions = {
   loop: true,
-  align: "center",
-  duration: "5",
-  breakpoints: {
-    "(min-width: 1024px)": {
-      align: "start",
-    },
-  },
+  align: "start",
 };
 
 export default function Gallery({
-  studioGalleryContent,
-  pilatesAssets,
-  strengthTrainingAssets,
+  studioContent,
+  pilatesContent,
+  strengthTrainingContent,
 }) {
   return (
     <>
@@ -45,36 +21,37 @@ export default function Gallery({
       </Head>
       <section className="w-full bg-black pb-10 pt-24 lg:pt-28">
         <div className="container flex flex-col items-center justify-center gap-10">
-          <div className="flex w-full flex-col items-center justify-center gap-4">
-            <h3 className="text-3xl text-primary lg:text-4xl">גלריה</h3>
+          <div className="flex w-full flex-col items-center justify-center lg:gap-2">
+            <h3 className="text-3xl text-primary lg:text-4xl">
+              {studioContent[0].title}
+            </h3>
 
-            <div className="w-[90%]">
-              <ImageCarousel
-                slides={studioGalleryContent[0].images}
-                settings={settings}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center justify-center gap-4">
-            <h3 className="text-3xl text-primary lg:text-4xl">פילאטיס</h3>
             <Carousel
-              slideStyle="lg:w-1/3"
-              className="lg:w-full"
-              mediaType="video"
-              slides={pilatesAssets}
               options={carouselOptions}
+              content={studioContent[0].images}
+              contentStyle="h-[75svh] lg:h-auto"
             />
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-4">
-            <h3 className="text-3xl text-primary lg:text-4xl">אימוני כוח</h3>
+          <div className="flex flex-col items-center justify-center lg:gap-2">
+            <h3 className="text-3xl text-primary lg:text-4xl">
+              {pilatesContent[0].title}
+            </h3>
             <Carousel
-              slideStyle="lg:w-1/3"
-              className="lg:w-full"
-              mediaType="video"
-              slides={strengthTrainingAssets}
               options={carouselOptions}
+              content={pilatesContent[0].videos}
+              contentType="video"
+            />
+          </div>
+
+          <div className="flex flex-col items-center justify-center lg:gap-2">
+            <h3 className="text-3xl text-primary lg:text-4xl">
+              {strengthTrainingContent[0].title}
+            </h3>
+            <Carousel
+              options={carouselOptions}
+              content={strengthTrainingContent[0].videos}
+              contentType="video"
             />
           </div>
         </div>
@@ -85,29 +62,35 @@ export default function Gallery({
 
 export async function getStaticProps() {
   try {
-    const studioGalleryContent = await client.fetch(GROQqueries.studioGallery);
-
-    const pilatesAssets = await fetchCloudinaryResources("video", "pilates");
-    const strengthTrainingAssets = await fetchCloudinaryResources(
-      "video",
-      "strength-training",
+    const studioContent = await client.fetch(GROQqueries.gallery.studio);
+    const pilatesContent = await client.fetch(GROQqueries.gallery.pilates);
+    const strengthTrainingContent = await client.fetch(
+      GROQqueries.gallery.strengthTraining,
     );
+
+    console.log(strengthTrainingContent);
 
     return {
       props: {
-        studioGalleryContent,
-        pilatesAssets,
-        strengthTrainingAssets,
+        studioContent,
+        pilatesContent,
+        strengthTrainingContent,
       },
     };
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);
     return {
       props: {
-        studioGalleryContent: [],
-        pilatesAssets: [],
-        strengthTrainingAssets: [],
+        studioContent: [],
+        pilatesContent: [],
+        strengthTrainingContent: [],
       },
     };
   }
 }
+
+Gallery.propTypes = {
+  studioContent: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pilatesContent: PropTypes.arrayOf(PropTypes.object).isRequired,
+  strengthTrainingContent: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
