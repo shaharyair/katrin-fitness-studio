@@ -64,8 +64,6 @@ export async function getStaticProps() {
       GROQqueries.gallery.strengthTraining,
     );
 
-    console.log(strengthTrainingContent);
-
     return {
       props: {
         studioContent,
