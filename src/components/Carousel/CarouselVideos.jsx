@@ -33,7 +33,7 @@ export default function CarouselVideos(props) {
   }, [emblaApi]);
 
   return (
-    <div className="flex touch-pan-y">
+    <>
       {videos.map((video, index) => {
         const videoRefSplit = video.asset._ref.split("-");
 
@@ -46,10 +46,7 @@ export default function CarouselVideos(props) {
 
         return (
           <div
-            className={cn(
-              "w-full flex-auto flex-shrink-0 flex-grow-0 p-0.5 lg:w-1/3",
-              videosStyle,
-            )}
+            className={cn("w-full flex-none p-0.5 lg:w-1/3", videosStyle)}
             key={video._key}
           >
             <video
@@ -69,7 +66,7 @@ export default function CarouselVideos(props) {
           </div>
         );
       })}
-    </div>
+    </>
   );
 }
 

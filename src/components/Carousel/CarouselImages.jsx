@@ -15,7 +15,7 @@ export default function CarouselImages(props) {
   const { images, imagesStyle } = props;
 
   return (
-    <div className="flex touch-pan-y">
+    <>
       {images.map((image) => {
         const imageUrl = urlFor(image).url();
 
@@ -38,7 +38,7 @@ export default function CarouselImages(props) {
           </div>
         );
       })}
-    </div>
+    </>
   );
 }
 

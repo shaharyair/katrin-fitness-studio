@@ -39,17 +39,19 @@ export default function Carousel(props) {
         className="z-20 m-auto w-full overflow-hidden rounded-lg"
         ref={emblaRef}
       >
-        {contentType === "video" && (
-          <CarouselVideos
-            emblaApi={emblaApi}
-            videos={content}
-            videosStyle={contentStyle}
-          />
-        )}
+        <div className="backface-hidden flex touch-pan-y">
+          {contentType === "video" && (
+            <CarouselVideos
+              emblaApi={emblaApi}
+              videos={content}
+              videosStyle={contentStyle}
+            />
+          )}
 
-        {contentType === "image" && (
-          <CarouselImages images={content} imagesStyle={contentStyle} />
-        )}
+          {contentType === "image" && (
+            <CarouselImages images={content} imagesStyle={contentStyle} />
+          )}
+        </div>
       </div>
 
       <PrevButton
