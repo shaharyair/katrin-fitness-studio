@@ -7,13 +7,13 @@ const modalFadeVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.15,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.15,
+      ease: "easeInOut",
     },
   },
 };
@@ -23,13 +23,13 @@ const messageScaleVariants = {
   visible: {
     scale: 1,
     transition: {
-      duration: 0.25,
+      ease: "easeInOut",
     },
   },
   exit: {
     scale: 0.85,
     transition: {
-      duration: 0.25,
+      ease: "easeInOut",
     },
   },
 };
