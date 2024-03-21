@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { ImSpinner8 } from "react-icons/im";
 import { z } from "zod";
 import Button from "./Button";
 import Input from "./Input";
@@ -54,7 +55,7 @@ export default function Contact() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { isSubmitting, errors },
   } = useForm({
     resolver: zodResolver(schema),
   });
@@ -159,8 +160,11 @@ export default function Contact() {
             <Button
               id="contact-submit-button"
               type="submit"
-              className="ml-auto mt-3 w-full text-base drop-shadow-md lg:w-auto lg:text-lg"
+              className="ml-auto mt-3 flex w-full items-center justify-center gap-2.5 text-base drop-shadow-md lg:w-auto lg:text-lg"
             >
+              {isSubmitting && (
+                <ImSpinner8 className="mt-[1px] h-4 w-4 animate-spin" />
+              )}
               {text.submitButton}
             </Button>
           </form>
