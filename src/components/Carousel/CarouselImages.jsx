@@ -1,7 +1,7 @@
-import Image from "next/image";
 import PropTypes from "prop-types";
 import { cn } from "../../../utils/cn";
 import { urlFor } from "../../../utils/sanity/imageUrlBuilder";
+import ImageWithPlaceholder from "../ImageWithPlaceholder";
 
 /**
  * @component
@@ -29,7 +29,7 @@ export default function CarouselImages(props) {
             )}
             key={image._key}
           >
-            <Image
+            <ImageWithPlaceholder
               src={imageUrl}
               width={width}
               height={height}
