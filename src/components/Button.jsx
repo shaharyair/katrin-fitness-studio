@@ -6,7 +6,7 @@ export default function Button({ ref, ...props }) {
       {...props}
       ref={ref}
       className={cn(
-        `rounded-3xl bg-primary px-6 py-2.5 text-xl font-thin text-black transition-colors duration-100 hover:bg-white hover:text-black focus:outline-primary`,
+        `rounded-3xl bg-primary px-6 py-2.5 text-xl font-thin text-black transition-colors duration-100 focus:outline-primary lg:hover:bg-white lg:hover:text-black`,
         props.className,
       )}
     >
