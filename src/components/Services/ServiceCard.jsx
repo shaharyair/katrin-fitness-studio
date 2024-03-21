@@ -1,13 +1,13 @@
-import Image from "next/image";
 import { cn } from "../../../utils/cn";
 import { urlFor } from "../../../utils/sanity/imageUrlBuilder";
+import ImageWithPlaceholder from "../ImageWithPlaceholder";
 
 export default function ServiceCard(props) {
   const { content } = props;
 
   return (
     <div>
-      <Image
+      <ImageWithPlaceholder
         src={urlFor(content?.mainImage).url()}
         width={750}
         height={450}
