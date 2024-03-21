@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { urlFor } from "../../utils/sanity/imageUrlBuilder";
+import ImageWithPlaceholder from "./ImageWithPlaceholder";
 
 export default function Transformations({ content }) {
   const { text, assets } = content;
@@ -23,7 +23,7 @@ export default function Transformations({ content }) {
               className="flex items-center justify-center gap-1 lg:gap-2"
             >
               {/* after transformation image */}
-              <Image
+              <ImageWithPlaceholder
                 src={urlFor(assetObj?.afterImage).url()}
                 width={450}
                 height={500}
@@ -32,9 +32,8 @@ export default function Transformations({ content }) {
                 className="aspect-[1/1.15] rounded-lg border-[.5px] border-primary object-cover object-center drop-shadow-md"
                 loading="lazy"
               />
-
               {/* before transformation image */}
-              <Image
+              <ImageWithPlaceholder
                 src={urlFor(assetObj?.beforeImage).url()}
                 width={450}
                 height={500}
